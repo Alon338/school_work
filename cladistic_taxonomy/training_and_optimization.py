@@ -4,8 +4,8 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from tensorflow.keras import optimizers
 
-from python.data_enhancement import train_generator, val_generator
-from python.model_building import model
+from cladistic_taxonomy.data_enhancement import train_generator, val_generator
+from cladistic_taxonomy.model_building import model
 
 model.compile(
     optimizer=optimizers.Adam(learning_rate=1e-4),

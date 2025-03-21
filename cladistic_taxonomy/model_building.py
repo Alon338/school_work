@@ -3,7 +3,7 @@
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras import layers, models
 
-from python.data_enhancement import img_height, img_width
+from cladistic_taxonomy.data_enhancement import img_height, img_width
 
 # 使用预训练的 VGG16 模型，不包含顶层全连接（include_top=False）
 base_model = VGG16(weights='imagenet', include_top=False,

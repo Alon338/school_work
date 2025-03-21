@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras import layers, models
-from python.data_enhancement import img_height, img_width
+from cladistic_taxonomy.data_enhancement import img_height, img_width
 
 # -------------------- 重构模型（Functional API） --------------------
 # 定义输入

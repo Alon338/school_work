@@ -3,7 +3,7 @@
 import numpy as np
 import tensorflow as tf
 from sklearn.metrics import confusion_matrix, classification_report
-from python.data_enhancement import test_generator
+from cladistic_taxonomy.data_enhancement import test_generator
 
 # 从训练脚本保存的 best_model.h5 中加载已编译、已训练好的模型
 model = tf.keras.models.load_model('best_model.h5')
