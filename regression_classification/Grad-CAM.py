@@ -1,10 +1,11 @@
+#5
 import cv2
 import numpy as np
 import tensorflow as tf
 from regression_classification.model_tensorFlow import combined_model,base_model
 # 定义图像尺寸和批大小
 img_height, img_width = 224, 224  # 输入模型的图像尺寸
-# 假设我们仍使用 VGG16 中的最后一个卷积层 'block5_conv3' 作为目标
+# 使用 VGG16 中的最后一个卷积层 'block5_conv3' 作为目标
 last_conv_layer = base_model.get_layer('block5_conv3')
 # 构造Grad-CAM模型，输出为目标卷积层输出和分类分支的预测
 grad_model = tf.keras.models.Model(
@@ -22,7 +23,7 @@ img_tensor = tf.convert_to_tensor(img_array)
 with tf.GradientTape() as tape:
     tape.watch(img_tensor)
     conv_outputs, predictions = grad_model(img_tensor)
-    # 假定我们关注类别索引 0
+    # 类别索引 0
     class_index = 0
     class_channel = predictions[:, class_index]
 

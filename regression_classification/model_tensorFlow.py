@@ -1,19 +1,18 @@
 #2
-
 import tensorflow as tf
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras import layers, models
 from tensorflow.keras.optimizers import Adam
 
-# 定义输入图像尺寸与类别数量（这里以2类为例）
+# 定义输入图像尺寸与类别数量
 img_height, img_width = 224, 224
-num_classes = 2  # 根据实际任务修改
+num_classes = 2  # 类别数量
 
 # ---- 1. 定义输入层 ----
 inputs = tf.keras.Input(shape=(img_height, img_width, 3))
 
 # ---- 2. 构建预训练基础模型 ----
-# 使用 VGG16 预训练模型作为特征提取器，去掉顶层全连接部分
+# 使用 VGG16 预训练模型作为特征提取器
 base_model = VGG16(weights='imagenet', include_top=False, input_tensor=inputs)
 base_model.trainable = False  # 冻结基础模型参数，避免在初期训练时发生过拟合
 
@@ -41,7 +40,7 @@ combined_model = models.Model(inputs=inputs, outputs=[cls_output, reg_output])
 combined_model.compile(
     optimizer=Adam(learning_rate=1e-4),
     loss={'classification': 'categorical_crossentropy', 'regression': 'mean_squared_error'},
-    loss_weights={'classification': 1.0, 'regression': 0.5},  # 你可以调整权重确保模型两边任务平衡学习
+    loss_weights={'classification': 1.0, 'regression': 0.5},  # 回归和分类的权重调整（可以通过调整权重确保模型两边任务平衡学习）
     metrics={'classification': 'accuracy', 'regression': 'mae'}
 )
 

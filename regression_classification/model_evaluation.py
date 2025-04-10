@@ -1,3 +1,4 @@
+#3
 import numpy as np
 import tensorflow as tf
 from sklearn.metrics import confusion_matrix, classification_report, mean_squared_error, mean_absolute_error
@@ -10,7 +11,7 @@ img_height, img_width = 224, 224  # 输入模型的图像尺寸
 # 加载保存的最优模型
 combined_model = tf.keras.models.load_model('best_combined_model.h5')
 
-# 构造测试集生成器（与训练集类似）
+# 构造测试集生成器
 test_csv = r'C:\Users\ASUS\IdeaProjects\VisualAnalysis\data\test\test_data.csv'
 test_generator = combined_data_generator(test_csv, images_dir, batch_size=32, target_size=(img_height, img_width), shuffle=False)
 # 测试步数：根据你的测试集大小设置
@@ -27,10 +28,8 @@ predictions = combined_model.predict(test_generator, steps=test_steps)
 # 处理分类任务
 cls_pred_prob = predictions[0]   # 分类预测概率
 cls_predictions = np.argmax(cls_pred_prob, axis=1)
-
-# 为了获取真实标签，这里假设测试 CSV 的 'class' 列中存放的也是类似 [1,0] 的 one-hot 编码字符串
 df_test = pd.read_csv(test_csv)
-# 这里简单地把 one-hot（字符串）转换为数值标签；实际情况根据你数据预处理的方式调整
+# 把 one-hot（字符串）转换为数值标签
 y_true_cls = np.array([np.argmax(np.array(eval(x))) if isinstance(x, str) else x for x in df_test['class']])
 
 # 计算并输出混淆矩阵和分类报告
@@ -38,7 +37,7 @@ cm = confusion_matrix(y_true_cls, cls_predictions)
 print("Confusion Matrix:")
 print(cm)
 
-target_names = ['brain', 'chest']  # 根据你的实际类别名称替换
+target_names = ['brain', 'chest']  # 分类标签名称
 print("Classification Report:")
 print(classification_report(y_true_cls, cls_predictions, target_names=target_names))
 
