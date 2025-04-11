@@ -6,8 +6,8 @@ from regression_classification.model_tensorFlow import combined_model
 # 定义图像尺寸和批大小
 img_height, img_width = 224, 224  # 输入模型的图像尺寸
 #  CSV 文件路径
-train_csv = r'C:\Users\ASUS\IdeaProjects\VisualAnalysis\data\test\test_data.csv'
-val_csv = r'C:\Users\ASUS\IdeaProjects\VisualAnalysis\data\test\test_data.csv'
+train_csv = r'C:\Users\ASUS\IdeaProjects\VisualAnalysis\data\test_data.csv'
+val_csv = r'C:\Users\ASUS\IdeaProjects\VisualAnalysis\data\val_data.csv'
 # 图片所在目录
 images_dir = r'C:\Users\ASUS\IdeaProjects\VisualAnalysis\data\test'
 

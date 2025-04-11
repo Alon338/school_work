@@ -12,7 +12,7 @@ img_height, img_width = 224, 224  # 输入模型的图像尺寸
 combined_model = tf.keras.models.load_model('best_combined_model.h5')
 
 # 构造测试集生成器
-test_csv = r'C:\Users\ASUS\IdeaProjects\VisualAnalysis\data\test\test_data.csv'
+test_csv = r'C:\Users\ASUS\IdeaProjects\VisualAnalysis\data\test_data.csv'
 test_generator = combined_data_generator(test_csv, images_dir, batch_size=32, target_size=(img_height, img_width), shuffle=False)
 # 测试步数：根据你的测试集大小设置
 test_steps = 20
